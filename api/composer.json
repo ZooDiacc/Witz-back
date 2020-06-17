@@ -34,6 +34,7 @@
         "phpoption/phpoption": "^1.7",
         "slim/psr7": "^1.1",
         "slim/slim": "^4.5",
+        "symfony/dotenv": "^5.1",
         "tuupola/base62": "^2.0",
         "tuupola/slim-jwt-auth": "^3.4",
         "vlucas/phpdotenv": "^5.0"
@@ -59,7 +60,7 @@
         }
     },
     "scripts": {
-        "start": "php -S localhost:8080 -t public",
+        "start": "php -S localhost:8081 -t public",
         "test": "phpunit"
     }
 }

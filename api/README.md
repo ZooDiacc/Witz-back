@@ -1,4 +1,20 @@
+Change les acces de la bdd dans le .env
+Les routes :
+- localhost:8080/chapters en GET et POST
+- localhost:8080/chapters/1 en GET, PUT et DELETE
 
+Lancer les deux commandes de test.sql dans ta bdd pour creer les tables
+
+Pour ajouter ou modifier avec POST ET GET faire un json avec 
+{
+    "title": "titre ici",
+    "text": "texte ici"
+}
+
+Pour lancer
+faire "composer install" et ensuite "composer start"
+
+Import le fichier API.postman_collection.json dans postman
 
 # Slim Framework 4 Skeleton Application
 

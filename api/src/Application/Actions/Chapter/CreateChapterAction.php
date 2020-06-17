@@ -18,12 +18,28 @@ class CreateChapterAction extends ChapterAction
         if (!isset($this->request->getParsedBody()['title']) || empty($this->request->getParsedBody()['title'])) {
             throw new ChapterBadRequestException();
         }
-        if (!isset($this->request->getParsedBody()['text']) || empty($this->request->getParsedBody()['text'])) {
+        if (!isset($this->request->getParsedBody()['content']) || empty($this->request->getParsedBody()['content'])) {
+            throw new ChapterBadRequestException();
+        }
+        if (!isset($this->request->getParsedBody()['slug']) || empty($this->request->getParsedBody()['slug'])) {
+            throw new ChapterBadRequestException();
+        }
+        if (!isset($this->request->getParsedBody()['titlenumber']) || empty($this->request->getParsedBody()['titlenumber'])) {
+            throw new ChapterBadRequestException();
+        }
+        if (!isset($this->request->getParsedBody()['background']) || empty($this->request->getParsedBody()['background'])) {
+            throw new ChapterBadRequestException();
+        }
+        if (!isset($this->request->getParsedBody()['is_active'])) {
             throw new ChapterBadRequestException();
         }
         
         $chapter->title = $this->request->getParsedBody()['title'];
-        $chapter->text = $this->request->getParsedBody()['text'];
+        $chapter->content = $this->request->getParsedBody()['content'];
+        $chapter->slug = $this->request->getParsedBody()['slug'];
+        $chapter->titlenumber = $this->request->getParsedBody()['titlenumber'];
+        $chapter->background = $this->request->getParsedBody()['background'];
+        $chapter->is_active = $this->request->getParsedBody()['is_active'];
         $chapter->save();
 
         return $this->respondWithData($chapter, 201);

@@ -1,25 +1,25 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Application\Actions\Chapter;
+namespace App\Application\Actions\Media;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use App\Domain\Chapter\Chapter;
 use App\Domain\Chapter\ChapterNotFoundException;
 
-class DeleteChapterAction extends ChapterAction
+class ListMediasAction extends MediaAction
 {
     protected function action(): Response
     {
         $chapterId = (int) $this->resolveArg('chapterId');
         $chapter = Chapter::find($chapterId);
-        if (!$chapter)
+
+        if (!isset($chapter)) {
             throw new ChapterNotFoundException();
+        }
 
-        $chapter->delete();
+        $medias = $chapter->medias;
 
-        $this->logger->info("Chapter of id `${chapterId}` was deleted.");
-
-        return $this->respondWithData();
+        return $this->respondWithData($medias);
     }
 }

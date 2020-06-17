@@ -8,4 +8,19 @@ class Chapter extends \Illuminate\Database\Eloquent\Model {
      * @var string
      */
     protected $table = 'chapter';
+
+    /**
+     * Get the medias for the chapter.
+     */
+    public function medias()
+    {
+        return $this->hasMany('App\Domain\Media\Media');
+    }
+
+    /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['medias'];
 }

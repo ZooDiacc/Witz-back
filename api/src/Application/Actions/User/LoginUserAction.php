@@ -9,6 +9,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use App\Domain\User\User;
 use App\Domain\User\UserNotFoundException;
 use App\Domain\User\UserUnauthorizedException;
+use App\Domain\User\UserBadRequestException;
 
 class LoginUserAction extends UserAction
 {
@@ -17,12 +18,20 @@ class LoginUserAction extends UserAction
      */
     protected function action(): Response
     {
-        $username = $this->request->getParsedBody()['username'];
+
+        if (!isset($this->request->getParsedBody()['login']) || empty($this->request->getParsedBody()['login'])) {
+            throw new UserBadRequestException();
+        }
+        if (!isset($this->request->getParsedBody()['password']) || empty($this->request->getParsedBody()['password'])) {
+            throw new UserBadRequestException();
+        }
+
+        $login = $this->request->getParsedBody()['login'];
         $password = $this->request->getParsedBody()['password'];
-        $user = User::where('username', '=', $username)->firstOrFail();
+        $user = User::where('login', '=', $login)->first();
 
         if (!$user)
-            throw new UserNotFoundException();
+            throw new UserUnauthorizedException();
 
         if (!password_verify($password, $user->password)) {
             throw new UserUnauthorizedException();
@@ -51,7 +60,7 @@ class LoginUserAction extends UserAction
             "scope" => $scopes
         ];
     
-        $secret = getenv("JWT_SECRET");
+        $secret = getenv("JWT_SECRET") ?: 'secret';
         $token = JWT::encode($payload, $secret, "HS256");
 
         $data = $user;

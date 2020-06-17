@@ -14,7 +14,7 @@ class ViewChapterAction extends ChapterAction
      */
     protected function action(): Response
     {
-        $chapterId = (int) $this->resolveArg('id');
+        $chapterId = (int) $this->resolveArg('chapterId');
         $chapter = Chapter::find($chapterId);
 
         if (!$chapter)

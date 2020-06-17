@@ -18,9 +18,8 @@ abstract class ChapterAction extends Action
     * @param LoggerInterface $logger
     * @param Chapter  $chapter
     */
-    public function __construct(LoggerInterface $logger, Chapter $chapter)
+    public function __construct(LoggerInterface $logger)
     {
         parent::__construct($logger);
-        $this->chapter = $chapter;
     }
 }
