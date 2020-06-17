@@ -1,9 +1,9 @@
 <?php
-define('DB_SERVER','localhost');
-define('DB_USER','root');
-define('DB_PASS' ,'');
-define('DB_NAME','witz');
-$con = mysqli_connect(DB_SERVER,DB_USER,DB_PASS,DB_NAME);
+define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+define('DB_USERNAME', getenv('DB_USERNAME') ?: 'root');
+define('DB_PASSWORD', getenv('DB_PASSWORD') ?: '');
+define('DB_DATABASE', getenv('DB_DATABASE') ?: 'witz');
+$con = mysqli_connect(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 // Check connection
 if (mysqli_connect_errno())
 {
